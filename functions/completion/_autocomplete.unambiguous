@@ -1,9 +1,8 @@
 #autoload
-# setopt localoptions verbose xtrace
 
 [[ -v _autocomplete__partial_list ]] &&
   return 1
-[[ $curcontext == history-*:* ]] &&
+[[ $curcontext == history- ]] &&
   return 1
 (( compstate[nmatches] < 2 )) &&
   return 1
