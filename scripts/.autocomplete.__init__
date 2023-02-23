@@ -13,7 +13,7 @@ typeset -gHa _autocomplete__func_opts=(
 )
 setopt $_autocomplete__func_opts[@]
 
-typeset -gHa _autocomplete__comp_opts=( localoptions NO_banghist NO_completeinword )
+typeset -gHa _autocomplete__comp_opts=( localoptions NO_banghist )
 typeset -gHa _autocomplete__ctxt_opts=( completealiases completeinword )
 
 .autocomplete.__init__.precmd() {
