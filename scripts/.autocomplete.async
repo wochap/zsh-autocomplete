@@ -276,6 +276,8 @@ log_functions+=( .autocomplete.async.pty )
   } always {
     print -rNC1 -- \
         "$_autocomplete__list_lines" "$_autocomplete__mesg" "$_autocomplete__comp_mesg[@]" $'\C-C'
+
+    # TODO: Check with `zstat '+mtime' -f $fd` to see if timestamp of fd has changed. If so, don't kill.
     builtin kill $sysparams[pid]
   }
 } 2>>| $_autocomplete__log_pty
@@ -522,7 +524,13 @@ log_functions+=( .autocomplete.async.list-choices.completion-widget )
         _displ_=( ${(@PA)_displ_name_} )
 
         if [[ -n $_displ_ ]]; then
+
+          if (( $#_grp[@] )); then
             local -PaU _uniques_=( ${_displ_[@]#*:} )
+          else
+            # TODO: Handle the case where completions with the same descripton aren't grouped together.
+            local -Pa _uniques_=( "$_displ_[@]" )
+          fi
 
           _autocomplete__max_lines=$(( _avail_list_lines_ - $#_uniques_[@] ))
           if (( _autocomplete__max_lines <= 0 )); then
