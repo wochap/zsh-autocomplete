@@ -158,6 +158,10 @@ Try the steps in the
 The following are the most commonly requested ways to configure Autocomplete's
 behavior.  Add these to your `.zshrc` file to use them.
 
+### Options:
+
+* `AUTOCOMPLETE_INHIBIT_INIT` (default: blank): if set, autocomplete will not automatically set up keybinds.
+
 ### Pass arguments to `compinit`
 
 If necessary, you can let Autocomplete pass arguments to `compinit` as follows:
