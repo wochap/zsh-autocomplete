@@ -10,8 +10,12 @@ autocomplete:config:cache-path() {
   typeset -ga reply=( "${XDG_CACHE_HOME:-$HOME/.cache}/zsh/compcache" )
 }
 
+# NOTE: d1bbecac646cb1ab5d3a0d3b5151c42c131c0a66 change causes severe lag
+# builtin zstyle ':completion:*' completer \
+#     _expand _complete _complete:-fuzzy _correct _approximate _ignored
+# PERF: revert change
 builtin zstyle ':completion:*' completer \
-    _expand _complete _complete:-fuzzy _correct _approximate _ignored
+    _expand _complete _correct _approximate _complete:-fuzzy _ignored
 
 builtin zstyle -e ':completion:*' max-errors autocomplete:config:max-errors
 autocomplete:config:max-errors() {
